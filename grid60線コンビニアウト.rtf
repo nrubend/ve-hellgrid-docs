@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg932\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W3;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <style>\
+  @page \{\
+    size: A3 portrait;\
+    margin: 0;\
+  \}\
+  body \{\
+    margin: 0;\
+    padding: 0;\
+  \}\
+  canvas \{\
+    display: block;\
+    margin: 0 auto;\
+    background: white;\
+  \}\
+</style>\
+<p><canvas id="ve03" width="1123" height="1587"></canvas></p>\
+<p>\
+<script>\
+  const canvas = document.getElementById("ve03");\
+  const ctx = canvas.getContext("2d");\
+\
+  const mmToPx = 3.78; // 96dpi\
+  const gridSpacingMM = 5;\
+  const spacingPx = gridSpacingMM * mmToPx;\
+\
+  const centerX = canvas.width / 2;\
+  const centerY = canvas.height / 2;\
+  const radius = 150 * mmToPx;\
+\
+  // 
+\f1 \'89\'7e\'82\'cc\'97\'d6\'8a\'73
+\f0 \
+  ctx.beginPath();\
+  ctx.strokeStyle = "#000";\
+  ctx.lineWidth = 1;\
+  ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);\
+  ctx.stroke();\
+\
+  // 
+\f1 \'90\'fc\'82\'c6\'94\'d4\'8d\'86\'82\'cc\'95\'60\'89\'e6
+\f0 \
+  ctx.strokeStyle = "#444";\
+  ctx.lineWidth = 0.7;\
+  ctx.font = "12px sans-serif";\
+  ctx.fillStyle = "#000";\
+\
+  for (let i = 0; i < 61; i++) \{\
+    const y = centerY + radius - i * spacingPx;\
+    ctx.beginPath();\
+    ctx.moveTo(centerX - radius, y);\
+    ctx.lineTo(centerX + radius, y);\
+    ctx.stroke();\
+\
+    // 
+\f1 \'94\'d4\'8d\'86\'82\'cd\'90\'fc\'82\'cc\'8d\'b6\'93\'e0\'91\'a4\'81\'41\'8c\'a9\'82\'a6\'82\'e9\'88\'ca\'92\'75\'82\'d6
+\f0 \
+    ctx.fillText(`$\{i + 1\}`, centerX - radius + 5, y - 4);\
+  \}\
+</script>\
+</p>}

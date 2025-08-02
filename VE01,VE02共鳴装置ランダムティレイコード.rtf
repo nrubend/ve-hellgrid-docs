@@ -1,0 +1,515 @@
+{\rtf1\ansi\ansicpg932\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W3;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 function HandleMIDI(event) \{\
+    if (event instanceof NoteOn) \{\
+        Trace("
+\f1 \'8f\'88\'97\'9d\'92\'86
+\f0 : " + event.pitch + " | Channel: " + event.channel);\
+\
+        var delayTime = 0;\
+        var resonanceChannel = 1; // 
+\f1 \'91\'53\'8b\'a4\'96\'c2\'89\'b9\'82\'cd
+\f0 1ch
+\f1 \'82\'c5\'91\'97\'90\'4d
+\f0 \
+\
+        // === 1ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+        if (event.channel === 1 && (event.pitch === 14 || event.pitch === 11 || event.pitch === 18 || event.pitch === 21)) \{\
+            if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+        \}\
+\
+        // === 2ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+        else if (event.channel === 2 && (event.pitch === 15 || event.pitch === 13 || event.pitch === 11 || event.pitch === 19 || event.pitch === 18 || event.pitch === 21)) \{\
+            if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+        \}\
+\
+        // === 3ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+        else if (event.channel === 3 && (event.pitch === 13 || event.pitch === 14 || event.pitch === 17 || event.pitch === 16 || event.pitch === 11 || event.pitch === 19 || event.pitch === 18 || event.pitch === 21 || event.pitch === 22)) \{\
+            if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+        \}\
+\
+        // === 4ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+        else if (event.channel === 4 && (event.pitch === 20 || event.pitch === 22 || event.pitch === 17 || event.pitch === 15 || event.pitch === 14 || event.pitch === 19 || event.pitch === 21 || event.pitch === 11)) \{\
+            if (event.pitch === 20) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+            if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+        \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 5ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 5 && (event.pitch === 20 || event.pitch === 22 || event.pitch === 16 || event.pitch === 15 || event.pitch === 14 || event.pitch === 19 || event.pitch === 11)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 20) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 6ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  (
+\f1 \'83\'58\'83\'6c\'83\'41
+\f0 ) ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 6 && (event.pitch === 16 || event.pitch === 15 || event.pitch === 14 || event.pitch === 13 || event.pitch === 11 || event.pitch === 21 || event.pitch === 19 || event.pitch === 18)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 7ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 7 && (event.pitch === 22 || event.pitch === 21 || event.pitch === 20 || event.pitch === 19 || event.pitch === 18 || event.pitch === 17 || event.pitch === 16 || event.pitch === 15 || event.pitch === 14 || event.pitch === 13)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 20) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'74\'83\'8d\'83\'41\'83\'5e\'83\'80
+\f0 2
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'74\'83\'8d\'83\'41\'83\'5e\'83\'80
+\f0 1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T3
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T2
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 8ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 8 && (event.pitch === 14 || event.pitch === 13 || event.pitch === 21)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T2
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85\'8b\'a4\'96\'c2
+\f0 \
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 9ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 9 && (event.pitch === 19 || event.pitch === 18 || event.pitch === 15 || event.pitch === 14 || event.pitch === 13)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 10ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0 : 
+\f1 \'83\'60\'83\'83\'83\'93\'83\'6c\'83\'8b\'82\'f0
+\f0 1
+\f1 \'82\'c9\'95\'cf\'8a\'b7\'82\'b5\'82\'c4\'91\'97\'90\'4d
+\f0  ===\
+        else if (event.channel === 10) \{\
+            event.channel = resonanceChannel; // 
+\f1 \'83\'60\'83\'83\'83\'93\'83\'6c\'83\'8b
+\f0 1
+\f1 \'82\'c9\'95\'cf\'8d\'58
+\f0 \
+            event.send();\
+            Trace("10ch
+\f1 \'82\'cc\'90\'4d\'8d\'86\'82\'f0
+\f0 1ch
+\f1 \'82\'c9\'95\'cf\'8a\'b7\'82\'b5\'82\'c4\'91\'97\'90\'4d
+\f0 : " + event.pitch);\
+            return; // 
+\f1 \'88\'c8\'8d\'7e\'82\'cc\'8f\'88\'97\'9d\'82\'cd\'95\'73\'97\'76
+\f0 \
+        \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 11ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 11 && (event.pitch === 22 || event.pitch === 21 || event.pitch === 16 || event.pitch === 15 || event.pitch === 14)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 12ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 12 && (event.pitch === 20 || event.pitch === 19 || event.pitch === 17 || event.pitch === 16 || event.pitch === 15)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 20) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 13ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 13 && (event.pitch === 22 || event.pitch === 19 || event.pitch === 16 || event.pitch === 17)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 22) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5;\
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 14ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 14 && (event.pitch === 18 || event.pitch === 13 || event.pitch === 11)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'56\'83\'93\'83\'6f\'83\'8b
+\f0 L (Cym1
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // kick
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 15ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 15 && (event.pitch === 18 || event.pitch === 13 || event.pitch === 11)) \{\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'56\'83\'93\'83\'6f\'83\'8b
+\f0 L (Cym1
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // kick
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+
+\f1 \'81\'40\'81\'40
+\f0 // === 16ch
+\f1 \'82\'cc\'8f\'88\'97\'9d
+\f0  ===\
+
+\f1 \'81\'40\'81\'40
+\f0 else if (event.channel === 16 && (event.pitch === 22 || event.pitch === 21 || event.pitch === 20 || event.pitch === 19 || event.pitch === 18 || event.pitch === 17 || event.pitch === 16 || event.pitch === 15 || event.pitch === 14 || event.pitch === 13 || event.pitch === 11)) \{\
+
+\f1 \'81\'40
+\f0     
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 21) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'58\'83\'76\'83\'89\'83\'62\'83\'56\'83\'85
+\f0  (Cym4
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 20) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'60\'83\'83\'83\'43\'83\'69
+\f0  (Cym3
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 19) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'56\'83\'93\'83\'6f\'83\'8b
+\f0 R (Cym2
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 18) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'56\'83\'93\'83\'6f\'83\'8b
+\f0 L (Cym1
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 17) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'74\'83\'8d\'83\'41\'83\'5e\'83\'80
+\f0 2 (T5
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 16) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // 
+\f1 \'83\'74\'83\'8d\'83\'41\'83\'5e\'83\'80
+\f0 1 (T4
+\f1 \'8b\'a4\'96\'c2
+\f0 )\
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 15) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T3
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 14) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T2
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 13) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // T1
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+    
+\f1 \'81\'40\'81\'40
+\f0 if (event.pitch === 11) delayTime = Math.random() * (62.5 - 2.5) + 2.5; // kick
+\f1 \'8b\'a4\'96\'c2
+\f0 \
+
+\f1 \'81\'40\'81\'40
+\f0 \}\
+\
+\
+        // 
+\f1 \'8b\'a4\'96\'c2\'89\'b9\'82\'f0\'92\'78\'89\'84\'94\'ad\'89\'b9
+\f0 \
+        if (delayTime > 0) \{\
+            var delayedEvent = new NoteOn(event);\
+            delayedEvent.channel = resonanceChannel; // 1ch
+\f1 \'82\'c5\'8b\'a4\'96\'c2\'89\'b9\'82\'f0\'91\'97\'90\'4d
+\f0 \
+            delayedEvent.sendAfterMilliseconds(delayTime);\
+            Trace("
+\f2 \uc0\u8594 
+\f0  
+\f1 \'91\'97\'90\'4d\'8d\'cf\'82\'dd
+\f0 : " + event.pitch + " | " + delayTime + "ms delay on Channel " + resonanceChannel);\
+        \}\
+    \} else \{\
+        // 
+\f1 \'82\'bb\'82\'ea\'88\'c8\'8a\'4f\'82\'cc\'83\'6d\'81\'5b\'83\'67\'82\'cd\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'91\'97\'90\'4d
+\f0 \
+        event.send();\
+    \}\
+\}\
+}
