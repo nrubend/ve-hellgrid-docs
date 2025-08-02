@@ -1,0 +1,219 @@
+{\rtf1\ansi\ansicpg932\cocoartf2639
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset128 HiraginoSans-W3;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 // === 
+\f1 \'92\'e8\'90\'94\'92\'e8\'8b\'60
+\f0  ===\
+const CENTER_NOTE_55 = 55;\
+const SIDE_SENSOR_NOTE_67 = 67;\
+const RIMCLICK_SENSOR_NOTE_71 = 71;\
+const SIDESTICK_NOTE_37 = 37;\
+const RIMCLICK
+\f1 \'94\'bb\'95\'ca
+\f0 _NOTE_60 = 60;\
+const CC_POS_NOTE_6 = 6;\
+const RIMSHOT_NOTE_39 = 39;\
+const SHALLOW_RIMSHOT_NOTE_41 = 41;\
+const RIMCLICK_ONLY_OUTPUT_NOTE_77 = 77;\
+\
+const LAYER_NOTES = [24, 25, 26, 27, 28, 29, 30, 31];\
+const CC16_MAP = \{\
+    24: 0, 24.5: 17, 25: 25, 25.5: 34, 26: 42,\
+    26.5: 51, 27: 59, 27.5: 68, 28: 76, 28.5: 85,\
+    29: 93, 29.5: 102, 30: 110, 30.5: 119, 31: 127\
+\};\
+\
+const TIME_THRESHOLD_MS =   20;\
+\
+let lastCenterTime = null;\
+let lastCenterVelocity = null;\
+let lastSideTime = null;\
+let lastSideVelocity = null;\
+let lastRimClickSensorTime = null;\
+let lastRimClickSensorVelocity = null;\
+let lastNote60Time = null;\
+let lastNote60Velocity = null;\
+let recentLayerNotes = [];\
+\
+function HandleMIDI(event) \{\
+    const now = Date.now();\
+\
+    if (event instanceof NoteOn) \{\
+        if (event.pitch === CENTER_NOTE_55) \{\
+            lastCenterTime = now;\
+            lastCenterVelocity = event.velocity;\
+        \} else if (event.pitch === SIDE_SENSOR_NOTE_67) \{\
+            lastSideTime = now;\
+            lastSideVelocity = event.velocity;\
+        \} else if (event.pitch === RIMCLICK_SENSOR_NOTE_71) \{\
+            lastRimClickSensorTime = now;\
+            lastRimClickSensorVelocity = event.velocity;\
+        \} else if (event.pitch === RIMCLICK
+\f1 \'94\'bb\'95\'ca
+\f0 _NOTE_60) \{\
+            lastNote60Time = now;\
+            lastNote60Velocity = event.velocity;\
+        \} else if (LAYER_NOTES.includes(event.pitch)) \{\
+            recentLayerNotes.push(\{ pitch: event.pitch, time: now \});\
+        \}\
+    \}\
+\
+    recentLayerNotes = recentLayerNotes.filter(n => now - n.time <= TIME_THRESHOLD_MS);\
+    const matchedLayers = recentLayerNotes.filter(n => now - n.time <= TIME_THRESHOLD_MS);\
+\
+    let handled = false;\
+\
+    // === RimShot
+\f1 \'94\'bb\'92\'e8
+\f0  ===\
+    const isRimShot =\
+        lastCenterTime && lastRimClickSensorTime &&\
+        Math.abs(now - lastCenterTime) <= TIME_THRESHOLD_MS &&\
+        Math.abs(now - lastRimClickSensorTime) <= TIME_THRESHOLD_MS &&\
+        matchedLayers.length > 0;\
+\
+    if (isRimShot) \{\
+        const baseVel = Math.max(lastCenterVelocity, lastRimClickSensorVelocity);\
+        const pitches = matchedLayers.map(n => n.pitch).sort();\
+        let ccValue = null;\
+\
+        if (pitches.length === 1) ccValue = CC16_MAP[pitches[0]];\
+        else if (pitches.length === 2) ccValue = CC16_MAP[(pitches[0] + pitches[1]) / 2];\
+        else if (pitches.length === 3) ccValue = CC16_MAP[(pitches[0] + pitches[1] + pitches[2]) / 3];\
+        else if (pitches.length === 4) ccValue = CC16_MAP[(pitches[1] + pitches[2]) / 2];\
+        else if (pitches.length >= 5) ccValue = CC16_MAP[pitches[2]];\
+\
+        if (ccValue !== null) \{\
+            const ratio = ccValue / 127;\
+            let vel39 = baseVel * (1 - ratio);\
+            let vel41 = baseVel * ratio;\
+            const gain = baseVel / Math.max(vel39, vel41);\
+            vel39 = Math.round(vel39 * gain);\
+            vel41 = Math.round(vel41 * gain);\
+\
+            // === RimClick
+\f1 \'83\'5a\'83\'93\'83\'54\'81\'5b\'81\'69
+\f0 71
+\f1 \'81\'6a\'82\'c6\'8c\'ae\'94\'d5
+\f0 note
+\f1 \'82\'cc\'93\'af\'8e\'9e\'8c\'9f\'8f\'6f\'82\'c9\'82\'e6\'82\'e9\'95\'95\'82\'b6\'8f\'88\'97\'9d
+\f0  ===\
+const isLayerAnd71 =\
+    lastRimClickSensorTime &&\
+    matchedLayers.length > 0 &&\
+    matchedLayers.some(n => Math.abs(n.time - lastRimClickSensorTime) <= TIME_THRESHOLD_MS);\
+\
+if (isLayerAnd71) \{\
+    const off71 = new NoteOn();\
+    off71.pitch = RIMCLICK_SENSOR_NOTE_71;  // 71\
+    off71.velocity = 0;\
+    off71.send();\
+\
+    // 
+\f1 \'8f\'f3\'91\'d4\'82\'cd\'82\'bb\'82\'cc\'82\'dc\'82\'dc\'82\'c5
+\f0 OK
+\f1 \'81\'69
+\f0 RimClick
+\f1 \'96\'7b\'8f\'88\'97\'9d\'82\'c9\'93\'9e\'92\'42\'82\'b3\'82\'b9\'82\'c8\'82\'a2\'82\'bd\'82\'df\'82\'cc\'96\'68\'89\'71\'8f\'88\'97\'9d\'81\'6a
+\f0 \
+\}\
+\
+            const n39 = new NoteOn(); n39.pitch = RIMSHOT_NOTE_39; n39.velocity = vel39; n39.send();\
+            const n41 = new NoteOn(); n41.pitch = SHALLOW_RIMSHOT_NOTE_41; n41.velocity = vel41; n41.send();\
+\
+            lastCenterTime = null; lastCenterVelocity = null;\
+            lastRimClickSensorTime = null; lastRimClickSensorVelocity = null;\
+            recentLayerNotes = [];\
+\
+            handled = true;\
+            return;\
+        \}\
+    \}\
+\
+    // === SideStick ===\
+    const isSideStick =\
+        lastRimClickSensorTime && lastSideTime &&\
+        Math.abs(lastRimClickSensorTime - lastSideTime) <= TIME_THRESHOLD_MS &&\
+        lastRimClickSensorVelocity > 0 && lastSideVelocity > 0;\
+\
+    if (!handled && isSideStick) \{\
+        const rim = new NoteOn();\
+        rim.pitch = SIDESTICK_NOTE_37;\
+        rim.velocity = Math.max(lastRimClickSensorVelocity, lastSideVelocity);\
+        rim.send();\
+\
+        lastRimClickSensorTime = null;\
+        lastSideTime = null;\
+        lastRimClickSensorVelocity = null;\
+        lastSideVelocity = null;\
+\
+        handled = true;\
+        return;\
+    \}\
+\
+    // === RimClick ===\
+    const isRimClick =\
+        lastNote60Time && lastRimClickSensorTime &&\
+        Math.abs(lastNote60Time - lastRimClickSensorTime) <= TIME_THRESHOLD_MS &&\
+        lastRimClickSensorVelocity >= 1;\
+\
+    if (!handled && isRimClick) \{\
+        const click = new NoteOn();\
+        click.pitch = RIMCLICK_ONLY_OUTPUT_NOTE_77;\
+        click.velocity = lastRimClickSensorVelocity;\
+        click.send();\
+\
+        lastNote60Time = null;\
+        lastRimClickSensorTime = null;\
+        lastRimClickSensorVelocity = null;\
+\
+        handled = true;\
+        return;\
+    \}\
+\
+    // === Open / Shallow ===\
+    const isOpenShallow =\
+        lastCenterTime && Math.abs(now - lastCenterTime) <= TIME_THRESHOLD_MS &&\
+        (matchedLayers.length > 0 || (lastSideTime && Math.abs(now - lastSideTime) <= TIME_THRESHOLD_MS));\
+\
+    if (!handled && isOpenShallow) \{\
+        const pitches = matchedLayers.map(n => n.pitch).sort();\
+        let ccValue = null;\
+\
+        if (pitches.length === 1) ccValue = CC16_MAP[pitches[0]];\
+        else if (pitches.length === 2) ccValue = CC16_MAP[(pitches[0] + pitches[1]) / 2];\
+        else if (pitches.length === 3) ccValue = CC16_MAP[(pitches[0] + pitches[1] + pitches[2]) / 3];\
+        else if (pitches.length === 4) ccValue = CC16_MAP[(pitches[1] + pitches[2]) / 2];\
+        else if (pitches.length >= 5) ccValue = CC16_MAP[pitches[2]];\
+\
+        if (ccValue !== null) \{\
+            const cc = new ControlChange();\
+            cc.number = 16;\
+            cc.value = ccValue;\
+            cc.send();\
+\
+            const snare = new NoteOn();\
+            snare.pitch = CC_POS_NOTE_6;\
+            snare.velocity = lastCenterVelocity;\
+            snare.send();\
+\
+            lastCenterTime = null;\
+            lastCenterVelocity = null;\
+            recentLayerNotes = [];\
+            lastSideTime = null;\
+            lastSideVelocity = null;\
+\
+            handled = true;\
+            return;\
+        \}\
+    \}\
+\
+    if (!handled) \{\
+        event.send();\
+    \}\
+\}\
+}
